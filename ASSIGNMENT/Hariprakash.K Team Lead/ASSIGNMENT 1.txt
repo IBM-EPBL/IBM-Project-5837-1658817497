@@ -1,0 +1,31 @@
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(2,INPUT);
+  pinMode(12,OUTPUT);
+}
+void loop()
+{
+  int motion=digitalRead(2);
+  if(motion==1){
+    Serial.println("Motion detected");
+    tone(12,10);
+     delay(1000);
+                   }
+                   else{
+                     Serial.println("No motion");
+                                    }
+                                    double data=analogRead(A2);
+                                    double n=data/1024;
+                                    double volt=n*5;
+                                    double off=volt-0.5;
+                                    double temperature=off*100;
+                                    Serial.print("Temperature data:");
+                                    Serial.println(temperature);
+                                    if(temperature>60.00)
+                                    {
+                                    tone(12,100);
+                                    delay(500);
+                                    noTone(12);
+                                    delay(500);
+                                    }
